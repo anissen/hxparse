@@ -12,27 +12,27 @@
 -D dump=pretty
 -neko bin/hxparse.n
 
---next
--swf bin/hxparse.swf
-
---next
--swf-version 8
--swf bin/hxparse8.swf
+# --next
+# -swf bin/hxparse.swf
+# 
+# --next
+# -swf-version 8
+# -swf bin/hxparse8.swf
 
 --next
 -js bin/hxparse.js
 
---next
--php bin/php
+# --next
+# -php bin/php
 
 --next
 -cpp bin/cpp
 
---next
--java bin/java
+# --next
+# -java bin/java
 
---next
--cs bin/cs
+# --next
+# -cs bin/cs
 
---next
--python bin/hxparse.py
+# --next
+# -python bin/hxparse.py

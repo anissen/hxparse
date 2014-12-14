@@ -1,5 +1,29 @@
 class Test {
 	static function main() {
+        function testRule(correct :Bool, s :String) {
+            var lexer = new RuleParser.RuleLexer(byte.ByteData.ofString(s));
+            var ts = new hxparse.LexerTokenSource(lexer, RuleParser.RuleLexer.tok);
+            var parser = new RuleParser(ts);
+            try {
+                var parsed = parser.parse();
+                var actual = RuleParser.RuleEvaluator.eval(parsed);
+                trace('\nINPUT:\n$s\nOUTPUT:\n$actual\n');
+                return true;
+            } catch (e :hxparse.ParserError) {
+                trace('Parse error', e);
+                return false;
+            }
+            // trace('Expected: $expected, Actual: $actual. Correct: ${expected == actual}');
+        }
+        testRule(true, 'if (x12) then (y34)');
+        testRule(true, 'if [(x12), (z56)] then (y34)');
+        testRule(false, '[(x12), (z56)]');
+        testRule(true, 'if [(a), (b), (c)] then [(d), (e)]\nif (f) then (g)');
+        testRule(true, 'if (a) then (b)\nif (c) then (d)');
+        testRule(true, '# blah\nif (a) then (b)\n# here is a comment\nif (c) then (d)');
+
+        return;
+
 		var parser = new PrintfParser(byte.ByteData.ofString("Valu$$e: $-050.2f kg"));
 		trace(parser.parse());
 
